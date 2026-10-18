@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.employee.entity.Employee;
 import com.employee.service.EmployeeService;
 
-@CrossOrigin(maxAge = 33600)
 @RestController
 public class EmployeeController {
 	
@@ -39,15 +38,14 @@ public class EmployeeController {
 	}
 	
 	@PatchMapping("/employees/{employeeId}")
-	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("employeeId") Long employeeId) {
-		Employee empObj=employeeService.getEmployeeById(employeeId);
-		if(empObj!=null) {
-			empObj.setManager(employee.getManager());
-			empObj.setName(employee.getName());
-			empObj.setSalary(employee.getSalary());
-		}
+	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee,
+            									   @PathVariable("employeeId") Long employeeId) {
+		Employee empObj = employeeService.getEmployeeById(employeeId); // кинет 404, если нет
+		empObj.setManager(employee.getManager());
+		empObj.setName(employee.getName());
+		empObj.setSalary(employee.getSalary());
 		return ResponseEntity.ok(employeeService.updateEmployee(empObj));
-	}
+}
 	
 	@DeleteMapping("/employees/{employeeId}")
 	public ResponseEntity<String> updateEmployee(@PathVariable("employeeId") Long employeeId) {

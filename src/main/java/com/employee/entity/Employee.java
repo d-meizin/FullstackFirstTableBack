@@ -23,6 +23,8 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "employeeid")
 	private Long employeeId;
+	@Column(name = "owner", nullable = false, length = 50)
+	private String owner;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "manager")
@@ -35,6 +37,12 @@ public class Employee {
 	}
 	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
+	}
+	public String getOwner() {
+	    return owner;
+	}
+	public void setOwner(String owner) {
+	    this.owner = owner;
 	}
 	public String getName() {
 		return name;
